@@ -5,7 +5,6 @@ var chai = require("chai"),
     Util = require("util"),
     goof = require("../lib")(),
     Errors = goof.Errors,
-    //Errors = require("../lib/errors"),
     Messages = goof.Messages;
 
 
@@ -40,7 +39,13 @@ describe("Errors", function() {
             expect(obj.getMessage("SUCCESS")).to.equal("this is success");
 
             obj = require("../lib")().Messages;
+            expect(obj.getMessage("SUCCESS")).to.equal("success");
+        });
+
+        it("Reload Messages", function () {
+            var obj = require("../lib")("./").Messages;
             expect(obj.getMessage("SUCCESS")).to.equal("this is success");
+
         });
     });
 
