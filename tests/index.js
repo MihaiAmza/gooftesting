@@ -3,10 +3,11 @@
 var chai = require("chai"),
     expect = chai.expect,
     Util = require("util"),
-    goof = require("../lib")();
-    Errors = goof.Errors;
-    Errors = require("../lib/errors"),
-    Msg = require("../lib/messages");
+    goof = require("../lib")(),
+    Errors = goof.Errors,
+    //Errors = require("../lib/errors"),
+    Messages = goof.Messages;
+
 
 describe("Errors", function() {
 
@@ -14,31 +15,31 @@ describe("Errors", function() {
 
     });
 
-    var Messages = new Msg();
+
     describe("Messages Tests", function() {
 
         it("Load Default Messages", function () {
 
-            var obj = new Msg("");
+            var obj = require("../lib")().Messages;
             expect(obj.length).to.equal(12);
             expect("success").to.equal(obj.getMessage("SUCCESS"));
         });
 
         it("Load Resource File Successfully", function () {
-            var obj = new Msg("./");
+            var obj = require("../lib")("./").Messages;
             expect(14).to.equal(obj.length);
         });
 
         it("Override Success text", function () {
-            var obj = new Msg("./");
+            var obj = require("../lib")("./").Messages;
             expect(obj.getMessage("SUCCESS")).to.equal("this is success");
         });
 
         it("Override Success text after recreation of Message Object should not revert", function () {
-            var obj = new Msg("./");
+            var obj = require("../lib")("./").Messages;
             expect(obj.getMessage("SUCCESS")).to.equal("this is success");
 
-            obj = new Msg("");
+            obj = require("../lib")().Messages;
             expect(obj.getMessage("SUCCESS")).to.equal("this is success");
         });
     });
