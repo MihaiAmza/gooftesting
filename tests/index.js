@@ -26,6 +26,7 @@ describe("Errors", function() {
 
         it("Load Resource File Successfully", function () {
             var obj = require("../lib")("./").Messages;
+            obj.reload();
             expect(14).to.equal(obj.length);
         });
 
@@ -39,12 +40,13 @@ describe("Errors", function() {
             expect(obj.getMessage("SUCCESS")).to.equal("this is success");
 
             obj = require("../lib")().Messages;
-            expect(obj.getMessage("SUCCESS")).to.equal("success");
+            expect(obj.getMessage("SUCCESS")).to.equal("this is success");
         });
 
-        it("Reload Messages", function () {
-            var obj = require("../lib")("./").Messages;
-            expect(obj.getMessage("SUCCESS")).to.equal("this is success");
+        it("After Reload Messages success message should revert to original state", function () {
+            var obj = require("../lib")().Messages;
+            obj.reload();
+            expect(obj.getMessage("SUCCESS")).to.equal("success");
 
         });
     });
