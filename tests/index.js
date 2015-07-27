@@ -3,6 +3,8 @@
 var chai = require("chai"),
     expect = chai.expect,
     Util = require("util"),
+    goof = require("../lib")();
+    Errors = goof.Errors;
     Errors = require("../lib/errors"),
     Msg = require("../lib/messages");
 
